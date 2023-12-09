@@ -12,14 +12,3 @@
       with_items:
         - cinder-api
         - cinder-scheduler
-
-    - name: Install Cinder Packages
-      when:
-        - ansible_distribution == 'CentOS'
-      yum:
-        name: "{{ item }}"
-        state: present
-      with_items:
-        - openstack-cinder
-        - python-cinder
-

@@ -1,27 +1,18 @@
 ---
-- name: Install Horizon in CentOS
+- name: Install Horizon in Ubuntu
   hosts: compute
   become: true
 
   tasks:
-    - name: Ensure EPEL Repository is Enabled
-      yum:
-        name: epel-release
-        state: present
-
-    - name: Install Specific Version of qpid-proton-c
-      yum:
-        name: qpid-proton-c-0.22.0-1.el7
-        state: present
 
     - name: Install OpenStack Horizon
-      yum:
+      apt:
         name: openstack-dashboard
         state: present
 
-    - name: Start and Enable Apache Service
-      systemd:
-        name: httpd
-        state: started
-        enabled: yes
 
+    - name: Start and enable Apache service
+      service:
+        name: apache2
+        state: restarted
+      become: true
